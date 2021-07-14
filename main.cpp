@@ -54,6 +54,7 @@ int main(int argc, char** argv) {
     fstream input_file;
     fstream result_file;
     for (auto n:all_files_) {
+        if (n[0]!='0' && n[0]!='p') continue;
         cout<<n<<endl;
         input_file.open(DIR+n,ios::in);
         string newfile = out_DIR+n+"_trans"+to_string(transformation);

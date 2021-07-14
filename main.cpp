@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
     for (auto n:all_files_) {
         cout<<n<<endl;
         input_file.open(DIR+n,ios::in);
-        string newfile = out_DIR+n+"_transformatioin"+to_string(transformation);
+        string newfile = out_DIR+n+"_trans"+to_string(transformation);
         result_file.open(newfile,ios::out);
         if (input_file.fail()) {
             cerr << "fail to open input file:" << n << "!\n";
@@ -124,7 +124,8 @@ int main(int argc, char** argv) {
                 cout<<"wrong! transformation must be 1/2/3"<<endl;
                 return EXIT_FAILURE;
             }
-
+        input_file.close();
+        result_file.close();
         }
 
     return 0;

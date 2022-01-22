@@ -55,7 +55,6 @@ int main(int argc, char** argv) {
     fstream result_file;
     for (auto n:all_files_) {
         if (n[0]!='0' && n[0]!='p') continue;
-        cout<<n<<endl;
         input_file.open(DIR+n,ios::in);
         string newfile = out_DIR+n+"_trans"+to_string(transformation);
         result_file.open(newfile,ios::out);
@@ -121,8 +120,27 @@ int main(int argc, char** argv) {
                     }
                     result_file<<endl;
                 }
-            } else {
-                cout<<"wrong! transformation must be 1/2/3"<<endl;
+            } else if (transformation==0){
+                while(getline(input_file,line)) {
+                    if (line[0] == '>'){
+                        result_file<<">payload"<<payload_num++<<endl;
+                        continue;
+                    }
+                    for (auto m:line) {
+                        if (m=='A')
+                            result_file<<'T';
+                        else if (m=='G')
+                            result_file<<'C';
+                        else if (m=='T')
+                            result_file<<'A';
+                        else if (m=='C')
+                            result_file<<'G';
+                    }
+                    result_file<<endl;
+                }
+            }
+            else {
+                cout<<"wrong! transformation must be 0/1/2/3"<<endl;
                 return EXIT_FAILURE;
             }
         input_file.close();
